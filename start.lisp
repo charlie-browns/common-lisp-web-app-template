@@ -10,9 +10,6 @@
 (unless *load-pathname*
   (error "Please LOAD this file."))
 
-(when (find-package :quicklisp)
-  (error "You must LOAD this file outside of your usual Quicklisp setup."))
-
 ;;; Find yourself.
 (defpackage #:rad-bootstrap
   (:use #:cl)
@@ -22,9 +19,18 @@
 (defvar *root* (make-pathname :name NIL :type NIL :defaults *load-pathname*))
 (defun path (pathname)
   (merge-pathnames pathname *root*))
+(defun path-home (pathname)
+  (merge-pathnames pathname (user-homedir-pathname)))
 
 ;;; Load Quicklisp and configure it.
-(load (path "quicklisp/setup.lisp"))
+(cond ((find-package :roswell)
+        ;; Support roswell for system-wide installation
+        (load (path-home ".roswell/lisp/quicklisp/setup.lisp")))
+      ((find-package :quicklisp) 
+        (error "You must LOAD this file outside of your usual Quicklisp setup."))
+      (t
+        (load (path "quicklisp/setup.lisp"))))
+
 (push (path "modules/") ql:*local-project-directories*)
 (ql:register-local-projects)
 
