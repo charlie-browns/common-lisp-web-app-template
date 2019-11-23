@@ -1,0 +1,12 @@
+; meta (:version 1.0 :package "RADIANCE-CORE")
+((:interfaces (:admin . "r-simple-admin") (:auth . "r-simple-auth")
+  (:ban . "r-simple-ban") (:cache . "r-simple-cache")
+  (:data-model . "r-simple-model") (:database . "i-lambdalite")
+  (:logger . "i-verbose") (:profile . "r-simple-profile")
+  (:rate . "r-simple-rate") (:server . "i-hunchentoot")
+  (:session . "r-simple-sessions") (:user . "r-simple-users"))
+ (:versions
+  . [hash-table equal ("radiance-core" :|2.1.1|) ("i-verbose" :|1.0.0|)
+     ("i-hunchentoot" :|1.1.0|) ("r-clip" :|1.0.0|)
+     ("r-simple-errors" :|1.0.0|)])
+ (:domains "localhost") (:port . 8000) (:startup :r-simple-errors) (:routes))
