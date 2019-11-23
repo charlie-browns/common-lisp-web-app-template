@@ -11,7 +11,11 @@
 (defun path (pathname)
   (merge-pathnames pathname *root*))
 
-;; Load Radiance and configure it.
+;;; Add local packages to quicklisp to use it as quicklisp packages.
+(push (path "modules/") ql:*local-project-directories*)
+(ql:register-local-projects)
+
+;;; Load Radiance and configure it.
 (ql:quickload '(#-sbcl prepl radiance))
 
 (defmethod radiance:environment-directory (environment (kind (eql :configuration)))
