@@ -6,6 +6,6 @@
   :class "radiance:virtual-module"
   :version "1.0.0"
   :components ((:file "module")
-               (:file "frontend"))
+               (:file "api"))
   :depends-on (:r-clip))
 
